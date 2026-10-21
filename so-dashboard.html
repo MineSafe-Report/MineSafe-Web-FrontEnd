@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="styles.css">
+  <script src="api-config.js" defer></script>
+  <script src="api.js" defer></script>
+  <script src="app.js" defer></script>
+  <title>Safety Officer dashboard | MineSafe</title>
+</head>
+<body class="so-dashboard-page">
+  <header>
+    <h1>MineSafe</h1>
+    <nav aria-label="Safety Officer">
+      <a href="sign-in.html" data-logout>Log out</a>
+    </nav>
+  </header>
+  <main class="so-dashboard">
+    <div class="so-dashboard-heading"><p>Safety Officer</p><h2>Reports</h2></div>
+    <div class="so-workspace">
+      <section class="so-search-panel" aria-labelledby="global-search-heading">
+        <h3 id="global-search-heading">Search reports</h3>
+        <form id="report-search-filters" role="search">
+          <label for="report-search">Name, ID or description</label>
+          <input id="report-search" name="search" type="search" placeholder="Search reports">
+          <label for="search-location">Location</label>
+          <select id="search-location" name="locationId"><option value="">All locations</option></select>
+          <label for="search-status">Status</label>
+          <select id="search-status" name="status">
+            <option value="">All statuses</option>
+            <option value="PENDING_REVIEW">Pending review</option>
+            <option value="APPROVED">Approved</option>
+            <option value="DENIED">Denied</option>
+          </select>
+          <label for="report-type-filter">Report type</label>
+          <select id="report-type-filter" name="typeCode">
+            <option value="">All types</option><option value="INCIDENT">Incidents</option>
+            <option value="HAZARD">Hazards</option><option value="NEAR_MISS">Near misses</option>
+          </select>
+          <label for="report-sort">Sort</label>
+          <select id="report-sort" name="sort">
+            <option value="newest">Newest first</option>
+            <option value="oldest">Oldest first</option>
+            <option value="type">Report type</option>
+          </select>
+          <div class="so-filter-actions">
+            <button type="submit">Apply filters</button>
+            <button id="clear-report-search" class="secondary-button" type="button">Clear</button>
+          </div>
+        </form>
+        <button id="refresh-reports" class="secondary-button" type="button">Refresh reports</button>
+      </section>
+      <section id="so-results-panel" class="so-results-panel" aria-label="Reports" tabindex="0">
+        <div id="report-table-view">
+          <h3 id="report-list-heading">All reports</h3>
+          <p id="report-list-message" role="status" aria-live="polite">Reports have not been loaded yet.</p>
+          <table class="so-report-table">
+            <caption>Reports matching the selected filters</caption>
+            <thead><tr>
+              <th scope="col">Report ID</th><th scope="col">Type</th><th scope="col">Location</th>
+              <th scope="col">Status</th><th scope="col">Submitted</th><th scope="col">Action</th>
+            </tr></thead>
+            <tbody id="report-rows"></tbody>
+          </table>
+          <div class="so-list-pages">
+            <button id="previous-reports" class="secondary-button" type="button" disabled>Previous</button>
+            <span id="report-page-count">Page 1</span>
+            <button id="next-reports" class="secondary-button" type="button" disabled>Next</button>
+          </div>
+        </div>
+        <article id="report-detail-view" class="so-detail-panel" aria-labelledby="detail-title" hidden>
+        <button id="back-to-reports" class="secondary-button" type="button">Back to reports</button>
+        <div class="so-detail-heading"><div><p class="so-overline">Selected report</p><h3 id="detail-title">Choose a report</h3></div></div>
+        <p id="report-detail-message" role="status" aria-live="polite">Loading report...</p>
+        <dl class="so-report-facts">
+          <dt>Report ID</dt><dd id="report-id">—</dd>
+          <dt>Report type</dt><dd id="report-type">—</dd>
+          <dt>Location</dt><dd id="report-location">—</dd>
+          <dt>Status</dt><dd id="report-status">—</dd>
+          <dt>Occurred</dt><dd id="report-occurred">—</dd>
+          <dt>Submitted</dt><dd id="report-submitted">—</dd>
+          <dt>Reported by</dt><dd id="report-worker">—</dd>
+          <dt id="report-review-reason-label" hidden>Review reason</dt><dd id="report-review-reason" hidden>—</dd>
+        </dl>
+        <section class="so-detail-section" aria-labelledby="description-heading"><h4 id="description-heading">Description</h4><p id="report-description">—</p></section>
+        <section class="so-detail-section" aria-labelledby="attachments-heading">
+          <h4 id="attachments-heading">Attached files</h4>
+          <h5>Images</h5><p id="image-message">No images loaded.</p><ul id="report-images" class="so-attachments"></ul>
+          <h5>Voice notes</h5><p id="voice-message">No voice notes loaded.</p><ul id="report-voice-notes" class="so-attachments"></ul>
+        </section>
+        </article>
+      </section>
+      <aside class="so-actions-panel" aria-label="Report actions">
+        <a id="audit-link" class="secondary-button" href="so-audit.html" hidden>View audit log</a>
+        <p id="report-action-message" role="status">Select a report to see available actions.</p>
+      </aside>
+    </div>
+  </main>
+</body>
+</html>

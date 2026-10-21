@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="styles.css">
+  <script src="api-config.js" defer></script>
+  <script src="api.js" defer></script>
+  <script src="app.js" defer></script>
+  <title>Report audit log | MineSafe</title>
+</head>
+<body>
+  <header>
+    <h1>MineSafe</h1>
+    <nav aria-label="Safety Officer">
+      <a href="so-dashboard.html">Dashboard</a>
+      <a href="sign-in.html" data-logout>Log out</a>
+    </nav>
+  </header>
+
+  <main>
+    <p><a id="back-to-report" href="so-dashboard.html">Back to report</a></p>
+    <h2>Report audit log</h2>
+    <p id="audit-message" role="status" aria-live="polite">No audit entries have been loaded yet.</p>
+    <table>
+      <caption>Changes to this report</caption>
+      <thead>
+        <tr>
+          <th scope="col">Date and time</th>
+          <th scope="col">Action</th>
+          <th scope="col">Changed by</th>
+          <th scope="col">Details</th>
+        </tr>
+      </thead>
+      <tbody id="audit-rows"></tbody>
+    </table>
+  </main>
+</body>
+</html>

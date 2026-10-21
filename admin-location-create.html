@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="styles.css">
+  <script src="api-config.js" defer></script>
+  <script src="api.js" defer></script>
+  <script src="app.js" defer></script>
+  <title>Create location | MineSafe</title>
+</head>
+<body class="admin-workspace-page">
+  <header class="admin-header">
+    <h1>MineSafe administration</h1>
+    <nav aria-label="Administration">
+      <a href="admin.html">Dashboard</a>
+      <a href="admin-accounts.html">Accounts</a>
+      <a href="admin-locations.html" aria-current="page">Locations</a>
+      <a href="sign-in.html" data-logout>Log out</a>
+    </nav>
+  </header>
+  <main class="admin-workspace">
+    <h2>Locations</h2>
+    <div class="admin-shell">
+      <section class="admin-filters-pane" aria-label="Locations search and filters">
+    <form id="location-filters" class="admin-filter-form" role="search" method="get" action="admin-locations.html">
+      <p><label for="location-search">Search locations</label><input id="location-search" name="search" type="search" placeholder="Name or code"></p>
+      <p><label for="location-active-filter">Location status</label><select id="location-active-filter" name="status"><option value="all">Active and inactive</option><option value="active">Active</option><option value="inactive">Inactive</option></select></p>
+      <div class="admin-filter-actions"><button type="submit">Apply filters</button><button id="clear-location-filters" class="secondary-button" type="button">Clear</button><button id="refresh-locations" class="secondary-button" type="button">Refresh</button></div>
+    </form></section>
+      <nav class="admin-side-nav" aria-label="Management pages"><a href="admin-accounts.html">Accounts</a></nav>
+      <div class="admin-create-pane">
+        <a class="admin-create-link" href="admin-location-create.html" aria-current="page">Add location</a>
+        <a href="admin-locations.html">Back to locations</a>
+      </div>
+      <section class="admin-content-pane" aria-label="Create location">
+        <h3 id="create-location-heading">Create location</h3><form id="create-location-form">
+        <p>
+          <label for="create-location-code">Location code</label><br>
+          <input id="create-location-code" name="locationCode" maxlength="50" required>
+        </p>
+        <p>
+          <label for="create-location-name">Location name</label><br>
+          <input id="create-location-name" name="locationName" maxlength="100" required>
+        </p>
+        <p>
+          <label for="create-location-info">Information</label><br>
+          <textarea id="create-location-info" name="locationInfo" maxlength="255" rows="4"></textarea>
+        </p>
+        <button type="submit">Create location</button>
+        <p id="create-location-message" role="status" aria-live="polite"></p>
+      </form>
+      </section>
+    </div>
+  </main>
+</body>
+</html>
