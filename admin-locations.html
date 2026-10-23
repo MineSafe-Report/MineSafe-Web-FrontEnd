@@ -1,44 +1,87 @@
 <!doctype html>
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="styles.css">
-  <script src="api-config.js" defer></script>
-  <script src="api.js" defer></script>
-  <script src="app.js" defer></script>
-  <title>Locations | MineSafe</title>
-</head>
-<body class="admin-workspace-page">
-  <header class="admin-header">
-    <h1>MineSafe administration</h1>
-    <nav aria-label="Administration">
-      <a href="sign-in.html" data-logout>Log out</a>
-    </nav>
-  </header>
-  <main class="admin-workspace">
-    <h2>Locations</h2>
-    <div class="admin-shell">
-      <section class="admin-filters-pane" aria-label="Locations search and filters">
-    <form id="location-filters" class="admin-filter-form" role="search" method="get" action="admin-locations.html">
-      <p><label for="location-search">Search locations</label><input id="location-search" name="search" type="search" placeholder="Name or code"></p>
-      <p><label for="location-active-filter">Location status</label><select id="location-active-filter" name="status"><option value="all">Active and inactive</option><option value="active">Active</option><option value="inactive">Inactive</option></select></p>
-      <div class="admin-filter-actions"><button type="submit">Apply filters</button><button id="clear-location-filters" class="secondary-button" type="button">Clear</button><button id="refresh-locations" class="secondary-button" type="button">Refresh</button></div>
-    </form></section>
-      <nav class="admin-side-nav" aria-label="Management pages"><a href="admin-accounts.html">Accounts</a></nav>
-      <div class="admin-create-pane">
-        <a class="admin-create-link" href="admin-location-create.html">Add location</a>
 
+<!-- LOCATIONS PAGE -->
+<!-- Find, add and update locations. -->
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="styles.css">
+    <script src="api-config.js" defer></script>
+    <script src="api.js" defer></script>
+    <script src="app.js" defer></script>
+    <title>Locations | MineSafe</title>
+  </head>
+
+  <body class="admin-workspace-page">
+    <header class="admin-header">
+      <h1>MineSafe administration</h1>
+      <nav aria-label="Administration">
+        <a href="sign-in.html" data-logout>Log out</a>
+      </nav>
+    </header>
+
+    <main class="admin-workspace">
+      <h2>Locations</h2>
+      <div class="admin-shell">
+
+        <!-- SEARCH AND FILTERS -->
+        <!-- These controls filter the account or location list. -->
+        <section class="admin-filters-pane" aria-label="Locations search and filters">
+          <form id="location-filters" class="admin-filter-form" role="search" method="get" action="admin-locations.html">
+            <p>
+              <label for="location-search">Search locations</label>
+              <input id="location-search" name="search" type="search" placeholder="Name or code">
+            </p>
+            <p>
+              <label for="location-active-filter">Location status</label>
+              <select id="location-active-filter" name="status">
+                <option value="all">Active and inactive</option>
+                <option value="active">Active</option>
+                <option value="inactive">Inactive</option>
+              </select>
+            </p>
+            <div class="admin-filter-actions">
+              <button type="submit">Apply filters</button>
+              <button id="clear-location-filters" class="secondary-button" type="button">Clear</button>
+              <button id="refresh-locations" class="secondary-button" type="button">Refresh</button>
+            </div>
+          </form>
+        </section>
+
+        <!-- PAGE NAVIGATION -->
+        <!-- Move between accounts and locations. -->
+        <nav class="admin-side-nav" aria-label="Management pages">
+          <a href="admin-accounts.html">Accounts</a>
+        </nav>
+
+        <!-- CREATE ACTION -->
+        <!-- Open the form for a new account or location. -->
+        <div class="admin-create-pane">
+          <a class="admin-create-link" href="admin-location-create.html">Add location</a>
+        </div>
+
+        <!-- PAGE CONTENT -->
+        <!-- The list or editing form is shown here. -->
+        <section class="admin-content-pane" aria-label="Locations list">
+          <h3 id="location-list-heading">Location list</h3>
+          <p id="location-list-message" role="status" aria-live="polite">Locations have not been loaded yet.</p>
+          <table class="location-table">
+            <caption>Mine locations</caption>
+            <thead>
+              <tr>
+                <th scope="col">Location ID</th>
+                <th scope="col">Name</th>
+                <th scope="col">Code</th>
+                <th scope="col">Information</th>
+                <th scope="col">Status</th>
+                <th scope="col">Actions</th>
+              </tr>
+            </thead>
+            <tbody id="location-rows"></tbody>
+          </table>
+        </section>
       </div>
-      <section class="admin-content-pane" aria-label="Locations list">
-        <h3 id="location-list-heading">Location list</h3>
-<p id="location-list-message" role="status" aria-live="polite">Locations have not been loaded yet.</p>
-<table class="location-table"><caption>Mine locations</caption><thead><tr>
-  <th scope="col">Location ID</th><th scope="col">Name</th><th scope="col">Code</th><th scope="col">Information</th>
-  <th scope="col">Status</th><th scope="col">Actions</th>
-</tr></thead><tbody id="location-rows"></tbody></table>
-      </section>
-    </div>
-  </main>
-</body>
+    </main>
+  </body>
 </html>

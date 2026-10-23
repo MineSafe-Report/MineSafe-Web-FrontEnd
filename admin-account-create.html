@@ -1,78 +1,126 @@
 <!doctype html>
+
+<!-- CREATE ACCOUNT PAGE -->
+<!-- Add a staff account and assign its role and locations. -->
 <html lang="en">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="styles.css">
-  <script src="api-config.js" defer></script>
-  <script src="api.js" defer></script>
-  <script src="app.js" defer></script>
-  <title>Create account | MineSafe</title>
-</head>
-<body class="admin-workspace-page">
-  <header class="admin-header">
-    <h1>MineSafe administration</h1>
-    <nav aria-label="Administration">
-      <a href="admin.html">Dashboard</a>
-      <a href="admin-accounts.html" aria-current="page">Accounts</a>
-      <a href="admin-locations.html">Locations</a>
-      <a href="sign-in.html" data-logout>Log out</a>
-    </nav>
-  </header>
-  <main class="admin-workspace">
-    <h2>Accounts</h2>
-    <div class="admin-shell">
-      <section class="admin-filters-pane" aria-label="Accounts search and filters">
-    <form id="account-filters" class="admin-filter-form" role="search" method="get" action="admin-accounts.html">
-      <p><label for="account-search">Search accounts</label><input id="account-search" name="search" type="search" placeholder="Name, Worker ID or email"></p>
-      <p><label for="account-role-filter">Role</label><select id="account-role-filter" name="roleId"><option value="">All roles</option></select></p>
-      <p><label for="account-active-filter">Account status</label><select id="account-active-filter" name="status"><option value="all">Active and inactive</option><option value="active">Active</option><option value="inactive">Inactive</option></select></p>
-      <div class="admin-filter-actions"><button type="submit">Apply filters</button><button id="clear-account-filters" class="secondary-button" type="button">Clear</button><button id="refresh-accounts" class="secondary-button" type="button">Refresh</button></div>
-    </form></section>
-      <nav class="admin-side-nav" aria-label="Management pages"><a href="admin-locations.html">Locations</a></nav>
-      <div class="admin-create-pane">
-        <a class="admin-create-link" href="admin-account-create.html" aria-current="page">Create new account</a>
-        <a href="admin-accounts.html">Back to accounts</a>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="styles.css">
+    <script src="api-config.js" defer></script>
+    <script src="api.js" defer></script>
+    <script src="app.js" defer></script>
+    <title>Create account | MineSafe</title>
+  </head>
+
+  <body class="admin-workspace-page">
+    <header class="admin-header">
+      <h1>MineSafe administration</h1>
+      <nav aria-label="Administration">
+        <a href="admin.html">Dashboard</a>
+        <a href="admin-accounts.html" aria-current="page">Accounts</a>
+        <a href="admin-locations.html">Locations</a>
+        <a href="sign-in.html" data-logout>Log out</a>
+      </nav>
+    </header>
+
+    <main class="admin-workspace">
+      <h2>Accounts</h2>
+      <div class="admin-shell">
+
+        <!-- SEARCH AND FILTERS -->
+        <!-- These controls filter the account or location list. -->
+        <section class="admin-filters-pane" aria-label="Accounts search and filters">
+          <form id="account-filters" class="admin-filter-form" role="search" method="get" action="admin-accounts.html">
+            <p>
+              <label for="account-search">Search accounts</label>
+              <input id="account-search" name="search" type="search" placeholder="Name, Worker ID or email">
+            </p>
+            <p>
+              <label for="account-role-filter">Role</label>
+              <select id="account-role-filter" name="roleId">
+                <option value="">All roles</option>
+              </select>
+            </p>
+            <p>
+              <label for="account-active-filter">Account status</label>
+              <select id="account-active-filter" name="status">
+                <option value="all">Active and inactive</option>
+                <option value="active">Active</option>
+                <option value="inactive">Inactive</option>
+              </select>
+            </p>
+            <div class="admin-filter-actions">
+              <button type="submit">Apply filters</button>
+              <button id="clear-account-filters" class="secondary-button" type="button">Clear</button>
+              <button id="refresh-accounts" class="secondary-button" type="button">Refresh</button>
+            </div>
+          </form>
+        </section>
+
+        <!-- PAGE NAVIGATION -->
+        <!-- Move between accounts and locations. -->
+        <nav class="admin-side-nav" aria-label="Management pages">
+          <a href="admin-locations.html">Locations</a>
+        </nav>
+
+        <!-- CREATE ACTION -->
+        <!-- Open the form for a new account or location. -->
+        <div class="admin-create-pane">
+          <a class="admin-create-link" href="admin-account-create.html" aria-current="page">Create new account</a>
+          <a href="admin-accounts.html">Back to accounts</a>
+        </div>
+
+        <!-- PAGE CONTENT -->
+        <!-- The list or editing form is shown here. -->
+        <section class="admin-content-pane" aria-label="Create account">
+          <h3 id="create-account-heading">Create account</h3>
+          <form id="create-account-form">
+            <p>
+              <label for="create-worker-id">Worker ID</label>
+              <br>
+              <input id="create-worker-id" name="workerId" maxlength="50" required>
+            </p>
+            <p>
+              <label for="create-full-name">Full name</label>
+              <br>
+              <input id="create-full-name" name="fullName" maxlength="100" autocomplete="name" required>
+            </p>
+            <p>
+              <label for="create-email">Email</label>
+              <br>
+              <input id="create-email" name="email" type="email" maxlength="255" autocomplete="email" required>
+            </p>
+            <p>
+              <label for="create-password">Initial password</label>
+              <br>
+              <input id="create-password" name="password" type="password" minlength="8" maxlength="100" autocomplete="new-password" required>
+            </p>
+            <p>
+              <label for="create-role">Role</label>
+              <br>
+              <select id="create-role" name="roleId" required>
+                <option value="">Choose a role</option>
+              </select>
+            </p>
+            <fieldset class="edit-choice-group">
+              <legend>Assigned locations</legend>
+              <div id="create-locations" class="checkbox-options">
+              </div>
+            </fieldset>
+            <p>
+              <label for="create-default-location">Default location</label>
+              <br>
+              <select id="create-default-location" name="defaultLocationId">
+                <option value="">No default location</option>
+              </select>
+            </p>
+            <button type="submit">Create account</button>
+            <p id="create-account-message" role="status" aria-live="polite">
+            </p>
+          </form>
+        </section>
       </div>
-      <section class="admin-content-pane" aria-label="Create account">
-        <h3 id="create-account-heading">Create account</h3><form id="create-account-form">
-        <p>
-          <label for="create-worker-id">Worker ID</label><br>
-          <input id="create-worker-id" name="workerId" maxlength="50" required>
-        </p>
-        <p>
-          <label for="create-full-name">Full name</label><br>
-          <input id="create-full-name" name="fullName" maxlength="100" autocomplete="name" required>
-        </p>
-        <p>
-          <label for="create-email">Email</label><br>
-          <input id="create-email" name="email" type="email" maxlength="255" autocomplete="email" required>
-        </p>
-        <p>
-          <label for="create-password">Initial password</label><br>
-          <input id="create-password" name="password" type="password" minlength="8" maxlength="100" autocomplete="new-password" required>
-        </p>
-        <p>
-          <label for="create-role">Role</label><br>
-          <select id="create-role" name="roleId" required>
-            <option value="">Choose a role</option>
-          </select>
-        </p>
-        <fieldset class="edit-choice-group">
-          <legend>Assigned locations</legend>
-          <div id="create-locations" class="checkbox-options"></div>
-        </fieldset>
-        <p>
-          <label for="create-default-location">Default location</label><br>
-          <select id="create-default-location" name="defaultLocationId">
-            <option value="">No default location</option>
-          </select>
-        </p>
-        <button type="submit">Create account</button>
-        <p id="create-account-message" role="status" aria-live="polite"></p>
-      </form>
-      </section>
-    </div>
-  </main>
-</body>
+    </main>
+  </body>
 </html>

@@ -1,34 +1,44 @@
 <!doctype html>
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="styles.css">
-  <script src="api-config.js" defer></script>
-  <script src="api.js" defer></script>
-  <script src="app.js" defer></script>
-  <title>Sign in | MineSafe</title>
-</head>
-<body class="sign-in-page">
-  <header>
-    <h1>MineSafe</h1>
-  </header>
 
-  <main>
-    <h2>Sign in</h2>
-    <p>Use your Worker ID or email address to sign in.</p>
-    <form id="login-form" method="post">
-      <p>
-        <label for="login">Worker ID or email</label><br>
-        <input id="login" name="login" type="text" autocomplete="username" maxlength="255" required>
+<!-- SIGN IN PAGE -->
+<!-- Staff sign in with their Worker ID or email. -->
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="styles.css">
+    <script src="api-config.js" defer></script>
+    <script src="api.js" defer></script>
+    <script src="app.js" defer></script>
+    <title>Sign in | MineSafe</title>
+  </head>
+
+  <body class="sign-in-page">
+    <header>
+      <h1>MineSafe</h1>
+    </header>
+
+    <main>
+      <h2>Sign in</h2>
+      <p>Use your Worker ID or email address to sign in.</p>
+
+      <!-- SIGN IN FORM -->
+      <!-- Enter account details and show sign in errors. -->
+      <form id="login-form" method="post">
+        <p>
+          <label for="login">Worker ID or email</label>
+          <br>
+          <input id="login" name="login" type="text" autocomplete="username" maxlength="255" required>
+        </p>
+        <p>
+          <label for="password">Password</label>
+          <br>
+          <input id="password" name="password" type="password" autocomplete="current-password" required>
+        </p>
+        <button type="submit">Sign in</button>
+      </form>
+      <p id="login-message" role="status" aria-live="polite">
       </p>
-      <p>
-        <label for="password">Password</label><br>
-        <input id="password" name="password" type="password" autocomplete="current-password" required>
-      </p>
-      <button type="submit">Sign in</button>
-    </form>
-    <p id="login-message" role="status" aria-live="polite"></p>
-  </main>
-</body>
+    </main>
+  </body>
 </html>
